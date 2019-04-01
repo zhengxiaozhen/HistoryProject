@@ -30,3 +30,5 @@ gen
 ###target
 
 /target/
+###classes
+/classes/
