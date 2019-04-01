@@ -16,4 +16,38 @@
     <servlet-name>Welcome</servlet-name>
     <url-pattern>/hello.do</url-pattern>
   </servlet-mapping>
+    <servlet>
+        <servlet-name>initDB</servlet-name>
+        <servlet-class>com.filter.InitDB</servlet-class>
+        <load-on-startup>5</load-on-startup>
+    </servlet>
+
+
+    <!-- 过滤器字符格式 -->
+    <filter>
+        <filter-name>CharactorFilter</filter-name>
+        <filter-class>com.filter.CharFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharactorFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <!-- sessionfilter -->
+
+    <filter>
+        <filter-name>sessionFilter</filter-name>
+        <filter-class>com.filter.SessionFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>sessionFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 </web-app>

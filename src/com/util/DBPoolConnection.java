@@ -1,4 +1,4 @@
-package com.Util;
+package com.util;
 
 /**
  * Created by tch on 2018/10/24.
