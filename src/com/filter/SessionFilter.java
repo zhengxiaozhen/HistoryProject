@@ -3,6 +3,7 @@ package com.filter;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -15,21 +16,6 @@ import java.io.IOException;
 public class SessionFilter implements Filter
 {
 
-    /**
-     * 判断是否为Ajax请求 <功能详细描述>
-     *
-     * @param request
-     * @return 是true, 否false
-     * @see [类、类#方法、类#成员]
-     */
-    public static boolean isAjaxRequest(HttpServletRequest request) {
-        String header = request.getHeader("X-Requested-With");
-        if (header != null && "XMLHttpRequest".equals(header))
-            return true;
-        else
-            return false;
-    }
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException
     {
@@ -37,55 +23,46 @@ public class SessionFilter implements Filter
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
     {
-// 不过滤的uri
-        String[] notFilter = new String[]  {"/login","/json",".js",".css",".ico",".jpg",".png"};
-        HttpServletRequest request= (HttpServletRequest) servletRequest;
-        HttpServletResponse response= (HttpServletResponse) servletResponse;
-
-        // 请求的uri
-        String uri = request.getRequestURI();
-        // 是否过滤
-        boolean doFilter = true;
-
-
-        //默认是rest风格
-        for (String s : notFilter) {
-            if (uri.indexOf(s) != -1) {
-                // 如果uri中包含不过滤的uri，则不进行过滤
-                doFilter = false;
-                break;
-            }
-        }
-        //如果有后缀  则不进行过滤
-        if(uri.indexOf(".") > 0)
+        // 将请求与响应向下转换
+        HttpServletResponse res = (HttpServletResponse) response;
+        HttpServletRequest req = (HttpServletRequest) request;
+        // 获得访问界面的url文件地址
+        String servletPath = req.getServletPath();
+        HttpSession session = req.getSession();
+        // 获取登录状态
+        String flag = (String) session.getAttribute("flag");
+        /* 判断是否是登录页、首页、登录servlet */
+        if (servletPath != null && (servletPath.equals("/login.jsp")))
         {
-            doFilter=false;
-        }
-
-
-
-        if (doFilter) {
-            // 执行过滤
-            // 从session中获取登录者实体
-            Object obj = request.getSession().getAttribute("userName");
-            if (null == obj) {
-                boolean isAjaxRequest = isAjaxRequest(request);
-                if (isAjaxRequest) {
-                    response.setCharacterEncoding("UTF-8");
-                    response.sendError(401, "您已经太长时间没有操作,请刷新页面");
-                    return;
+            // 是则直接转发到下一组件
+            chain.doFilter(request, response);
+        } else
+        {
+            // 否，则验证登录状态
+            if (flag != null)
+            {
+                if (flag.equals("login_success"))
+                {
+                    // 登录成功，直接转发到下一组件
+                    chain.doFilter(request, response);
+                } else
+                {
+                    // 登录失败，跳转到登录页，并保证当前网页的url文件路径
+                    req.setAttribute("msg", "登录失败");
+                    req.setAttribute("return_uri", servletPath);
+                    RequestDispatcher rd = req.getRequestDispatcher("/login.jsp");
+                    rd.forward(req, res);
                 }
-                response.sendRedirect("/login");
-                return;
-            } else {
-                // 如果session中存在登录者实体，则继续
-                filterChain.doFilter(request, response);
+            } else
+            {
+                // 未登录，跳转到登录页，并保证当前网页的url文件路径
+                req.setAttribute("msg", "您尚未登录，请登录");
+                req.setAttribute("return_uri", servletPath);
+                RequestDispatcher rd = req.getRequestDispatcher("/login.jsp");
+                rd.forward(req, res);
             }
-        } else {
-            // 如果不执行过滤，则继续
-            filterChain.doFilter(request, response);
         }
     }
 

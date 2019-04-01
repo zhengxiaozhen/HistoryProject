@@ -3,6 +3,9 @@ package com.filter;
 import javax.servlet.*;
 import java.io.IOException;
 
+/**
+ * 字符格式过滤
+ */
 public class CharFilter implements Filter
 {
     String encoding = null;  //字符编码

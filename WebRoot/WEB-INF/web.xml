@@ -38,7 +38,7 @@
     </filter-mapping>
 
 
-    <!-- sessionfilter -->
+    <!-- sessionfilter  只控制jsp结尾的文件-->
 
     <filter>
         <filter-name>sessionFilter</filter-name>
@@ -47,7 +47,7 @@
 
     <filter-mapping>
         <filter-name>sessionFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>*.jsp</url-pattern>
     </filter-mapping>
 
 </web-app>
