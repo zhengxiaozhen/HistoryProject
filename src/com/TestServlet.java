@@ -1,18 +1,22 @@
 package com;
 
-import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import com.alibaba.druid.pool.DruidPooledConnection;
+import com.util.DBPoolConnection;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.util.DBPoolConnection;
-import com.alibaba.druid.pool.DruidPooledConnection;
-public class test extends HttpServlet {
+import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+/**  功能描述
+ * @Author zhoulq
+ * @Description //TODO
+ * @Date 11:48 2019/4/8
+ **/
+public class TestServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,20 +40,28 @@ public class test extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
+		} finally
+		{
 			if (ptmt != null)
-				try {
+			{
+				try
+				{
 					ptmt.close();
-				} catch (SQLException e1) {
+				} catch (SQLException e1)
+				{
 					e1.printStackTrace();
 				}
-
+			}
 			if (coon != null)
-				try {
+			{
+				try
+				{
 					coon.close();
-				} catch (SQLException e1) {
+				} catch (SQLException e1)
+				{
 					e1.printStackTrace();
 				}
+			}
 		}
 
 	}

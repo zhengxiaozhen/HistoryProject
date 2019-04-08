@@ -10,7 +10,7 @@
   </welcome-file-list>
 <servlet>
     <servlet-name>Welcome</servlet-name>
-    <servlet-class>com.test</servlet-class>
+    <servlet-class>com.TestServlet</servlet-class>
    </servlet>
    <servlet-mapping>
     <servlet-name>Welcome</servlet-name>
