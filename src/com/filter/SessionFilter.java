@@ -10,7 +10,7 @@ import java.io.IOException;
  * @Classname SessionFilter
  * @Description
  * @Date 2019/4/1 11:46
- * @Created by zhoulq
+ * @author  by zhoulq
  */
 
 public class SessionFilter implements Filter
@@ -34,7 +34,7 @@ public class SessionFilter implements Filter
         // 获取登录状态
         String flag = (String) session.getAttribute("flag");
         /* 判断是否是登录页、首页、登录servlet */
-        if (servletPath != null && (servletPath.equals("/login.jsp")))
+        if (servletPath != null && ("/login.jsp".equals(servletPath)))
         {
             // 是则直接转发到下一组件
             chain.doFilter(request, response);
@@ -43,7 +43,7 @@ public class SessionFilter implements Filter
             // 否，则验证登录状态
             if (flag != null)
             {
-                if (flag.equals("login_success"))
+                if ("login_success".equals(flag))
                 {
                     // 登录成功，直接转发到下一组件
                     chain.doFilter(request, response);

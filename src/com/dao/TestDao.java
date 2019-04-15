@@ -2,7 +2,7 @@ package com.dao;
 
 import com.alibaba.druid.pool.DruidPooledConnection;
 import com.exception.DaoException;
-import com.filter.initDbPoolConnection;
+import com.filter.InitDbPoolConnection;
 import com.util.DbPoolConnection;
 
 import java.sql.PreparedStatement;
@@ -15,11 +15,11 @@ import java.sql.ResultSet;
  * @Date 2019/4/15 9:03
  * @Version 1.0
  */
-public class testDao
+public class TestDao
 {
     private static final long serialVersionUID = -71334260745841874L;
 
-    DbPoolConnection dbp = initDbPoolConnection.db;
+    DbPoolConnection dbp = InitDbPoolConnection.db;
     DruidPooledConnection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;

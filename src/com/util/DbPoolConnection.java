@@ -10,6 +10,8 @@ package com.util;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.alibaba.druid.pool.DruidPooledConnection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,11 +21,12 @@ import java.util.Properties;
 
 /**
  * 要实现单例模式，保证全局只有一个数据库连接池
+ *
  * @author 暖暖
  */
 public class DbPoolConnection
 {
-    // static Logger log = Logger.getLogger(DBPoolConnection.class);
+    static Logger log = LoggerFactory.getLogger(DbPoolConnection.class);
     private static DbPoolConnection dbPoolConnection = null;
     private static DruidDataSource druidDataSource = null;
 
@@ -32,7 +35,8 @@ public class DbPoolConnection
         Properties properties = loadPropertiesFile("druid.properties");
         try
         {
-            druidDataSource = (DruidDataSource) DruidDataSourceFactory.createDataSource(properties); //DruidDataSrouce工厂模式
+            //DruidDataSrouce工厂模式
+            druidDataSource = (DruidDataSource) DruidDataSourceFactory.createDataSource(properties);
             System.out.println("加载数据源成功：" + druidDataSource);
         } catch (Exception e)
         {
@@ -57,7 +61,8 @@ public class DbPoolConnection
 
     /**
      * 返回druid数据库连接
-     *DruidPooledConnection
+     * DruidPooledConnection
+     *
      * @return
      * @throws SQLException
      */
@@ -67,13 +72,12 @@ public class DbPoolConnection
     }
 
     /**
-     *
      * @return Properties对象
      */
     private static Properties loadPropertiesFile(String fullFile)
     {
         String webRootPath = null;
-        if (null == fullFile || fullFile.equals(""))
+        if (null == fullFile || "".equals(fullFile))
         {
             throw new IllegalArgumentException("Properties file path can not be null" + fullFile);
         }

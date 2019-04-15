@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
  * @Classname ${NAME}
  * @Description 初始化数据库连接池
  * @Date 2019/4/1 11:36
- * @Created by zhoulq
+ * @author  by zhoulq
  */
-public class initDbPoolConnection extends HttpServlet
+public class InitDbPoolConnection extends HttpServlet
 {
     public static DbPoolConnection db = null;
 

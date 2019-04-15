@@ -13,7 +13,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 业务逻辑层异常
- * @date 2011/04/07
+ * @date
+ * @author
  *
  */
 public class ServiceException extends Exception{

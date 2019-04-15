@@ -1,6 +1,6 @@
 package com.controller;
 
-import com.dao.testDao;
+import com.dao.TestDao;
 import com.exception.DaoException;
 
 import javax.servlet.ServletException;
@@ -18,13 +18,13 @@ import java.io.IOException;
  * @Version 1.0
  */
 @WebServlet(name = "testController", value = "/testController")
-public class testController extends HttpServlet
+public class TestController extends HttpServlet
 {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         //控制层
-        testDao testDao = new testDao();
+        TestDao testDao = new TestDao();
 
 
         try

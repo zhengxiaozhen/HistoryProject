@@ -13,7 +13,7 @@
     <!--用来启动 log4jConfigLocation的servlet -->
     <servlet>
         <servlet-name>Log4JInitServlet</servlet-name>
-        <servlet-class>com.filter.Log4JInitServlet</servlet-class>
+        <servlet-class>com.filter.Log4jInitServlet</servlet-class>
         <init-param>
             <param-name>log4j-properties-location</param-name>
             <param-value>/WEB-INF/classes/log4j.properties</param-value>
@@ -27,7 +27,7 @@
 
     <servlet>
         <servlet-name>initDb</servlet-name>
-        <servlet-class>com.filter.initDbPoolConnection</servlet-class>
+        <servlet-class>com.filter.InitDbPoolConnection</servlet-class>
         <load-on-startup>5</load-on-startup>
     </servlet>
 

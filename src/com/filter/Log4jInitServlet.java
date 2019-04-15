@@ -21,14 +21,14 @@ import java.io.IOException;
  * @Version 1.0
  */
 @WebServlet("/Log4JInitServlet")
-public class Log4JInitServlet extends HttpServlet
+public class Log4jInitServlet extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Log4JInitServlet() {
+    public Log4jInitServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
