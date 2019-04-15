@@ -2,6 +2,7 @@ package com.util;
 
 /**
  * Created by tch on 2018/10/24.
+ *
  * @deprecated Druid数据库连接池连接
  */
 
@@ -18,18 +19,23 @@ import java.util.Properties;
 
 /**
  * 要实现单例模式，保证全局只有一个数据库连接池
+ * @author 暖暖
  */
-public class DBPoolConnection {
-   // static Logger log = Logger.getLogger(DBPoolConnection.class);
-    private static DBPoolConnection dbPoolConnection = null;
+public class DbPoolConnection
+{
+    // static Logger log = Logger.getLogger(DBPoolConnection.class);
+    private static DbPoolConnection dbPoolConnection = null;
     private static DruidDataSource druidDataSource = null;
 
-    static {
+    static
+    {
         Properties properties = loadPropertiesFile("druid.properties");
-        try {
-                druidDataSource = (DruidDataSource) DruidDataSourceFactory.createDataSource(properties); //DruidDataSrouce工厂模式
-                System.out.println("加载数据源成功："+druidDataSource);
-        } catch (Exception e) {
+        try
+        {
+            druidDataSource = (DruidDataSource) DruidDataSourceFactory.createDataSource(properties); //DruidDataSrouce工厂模式
+            System.out.println("加载数据源成功：" + druidDataSource);
+        } catch (Exception e)
+        {
             e.printStackTrace();
             //log.error("获取配置失败");
         }
@@ -40,9 +46,11 @@ public class DBPoolConnection {
      *
      * @return
      */
-    public static synchronized DBPoolConnection getInstance() {
-        if (null == dbPoolConnection) {
-            dbPoolConnection = new DBPoolConnection();
+    public static synchronized DbPoolConnection getInstance()
+    {
+        if (null == dbPoolConnection)
+        {
+            dbPoolConnection = new DbPoolConnection();
         }
         return dbPoolConnection;
     }
@@ -53,7 +61,8 @@ public class DBPoolConnection {
      * @return
      * @throws SQLException
      */
-    public DruidPooledConnection getConnection() throws SQLException {
+    public DruidPooledConnection getConnection() throws SQLException
+    {
         return druidDataSource.getConnection();
     }
 
@@ -61,28 +70,36 @@ public class DBPoolConnection {
      *
      * @return Properties对象
      */
-    private static Properties loadPropertiesFile(String fullFile) {
+    private static Properties loadPropertiesFile(String fullFile)
+    {
         String webRootPath = null;
-        if (null == fullFile || fullFile.equals("")) {
+        if (null == fullFile || fullFile.equals(""))
+        {
             throw new IllegalArgumentException("Properties file path can not be null" + fullFile);
         }
-        webRootPath = DBPoolConnection.class.getClassLoader().getResource("").getPath();
+        webRootPath = DbPoolConnection.class.getClassLoader().getResource("").getPath();
         webRootPath = new File(webRootPath).getParent();
         InputStream inputStream = null;
         Properties p = null;
-        try {
+        try
+        {
             inputStream = new FileInputStream(new File(webRootPath + File.separator + fullFile));
             p = new Properties();
             p.load(inputStream);
-        } catch (Exception e) {
-            System.out.println("读取配置文件："+webRootPath + File.separator + fullFile);
+        } catch (Exception e)
+        {
+            System.out.println("读取配置文件：" + webRootPath + File.separator + fullFile);
             e.printStackTrace();
-        } finally {
-            try {
-                if (null != inputStream) {
+        } finally
+        {
+            try
+            {
+                if (null != inputStream)
+                {
                     inputStream.close();
                 }
-            } catch (Exception e) {
+            } catch (Exception e)
+            {
                 e.printStackTrace();
             }
         }
