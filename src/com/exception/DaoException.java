@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 public class DaoException extends Exception {
 
     /**
-     *
+     *保存日志
      */
     private static final long serialVersionUID = -8801718407102159973L;
 
