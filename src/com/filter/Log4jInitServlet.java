@@ -15,7 +15,7 @@ import java.io.IOException;
 
 /**
  * @Classname Log4JInitServlet
- * @Description TODO
+ * @Description 日志初始化监听
  * @Author zhoulq
  * @Date 2019/4/15 10:55
  * @Version 1.0

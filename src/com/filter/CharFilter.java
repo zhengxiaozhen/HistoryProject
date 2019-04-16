@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class CharFilter implements Filter
 {
-    //字符编码
+
     String encoding = null;
 
     @Override

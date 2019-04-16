@@ -40,7 +40,6 @@ public class TestDao
         }catch (Exception e)
         {
 
-            //throw new DaoException(e.getClass(), e.getCause());
             throw new DaoException(e.getClass(), e.getMessage());
 
         }

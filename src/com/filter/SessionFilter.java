@@ -34,7 +34,9 @@ public class SessionFilter implements Filter
         // 获取登录状态
         String flag = (String) session.getAttribute("flag");
         /* 判断是否是登录页、首页、登录servlet */
-        if (servletPath != null && ("/login.jsp".equals(servletPath)))
+        String s1="/login.jsp";
+        String s2="login_success";
+        if (servletPath != null && (s1.equals(servletPath)))
         {
             // 是则直接转发到下一组件
             chain.doFilter(request, response);
@@ -43,7 +45,7 @@ public class SessionFilter implements Filter
             // 否，则验证登录状态
             if (flag != null)
             {
-                if ("login_success".equals(flag))
+                if (s2.equals(flag))
                 {
                     // 登录成功，直接转发到下一组件
                     chain.doFilter(request, response);
