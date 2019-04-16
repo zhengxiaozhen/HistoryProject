@@ -29,7 +29,7 @@ public class TestDao
         try
         {
             conn = dbp.getConnection();
-            String sql = "select to_char(sysdate,'yyyy-mm-dd hh24:mi:ss1') s from dual";
+            String sql = "select to_char(sysdate,'yyyy-mm-dd hh24:mi:ss') s from dual";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next())
