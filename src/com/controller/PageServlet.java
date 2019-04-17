@@ -1,6 +1,10 @@
-package com.util;
+package com.controller;
+
+import com.util.JdbcUtil;
+import com.util.PageUtil;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,7 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
-
+@WebServlet(name = "PgaeServlet", value = "/PgaeServlet")
 public class PageServlet extends HttpServlet {
     @Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -28,7 +32,7 @@ public class PageServlet extends HttpServlet {
 			PageUtil pageUtil = new PageUtil(request);
 			pageUtil.setPageSize(8);
 			// 取记录数
-			String sql = "Select count(1) as rsCount From T_Userinfo";
+			String sql = "Select count(1) as rsCount From tc_jcyw.t_user";
 			Map<String, Object> map = JdbcUtil.getObjectMap(sql);
 			// 获取总记录数
 			int rsCount = (Integer) map.get("rscount");
@@ -47,7 +51,7 @@ public class PageServlet extends HttpServlet {
 			StringBuffer buffer = new StringBuffer();
 			buffer.append("select * from(");
 			buffer.append(" select rownum rn, t.* from(");
-			buffer.append(" select * from T_Userinfo order by userid asc)t");
+			buffer.append(" select * from tc_jcyw.t_user order by userid asc)t");
 			buffer.append(" where rownum<=" + end + ") t");
 			buffer.append(" where t.rn > = " + start + "");
 

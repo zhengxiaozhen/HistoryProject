@@ -1,4 +1,4 @@
-package com.util;
+package com.dao;
 
 public class ProductBean {
 	private int itemid;
