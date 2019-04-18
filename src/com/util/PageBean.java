@@ -13,12 +13,16 @@ import java.util.List;
 public class PageBean<T> implements Serializable
 {
     //已知数据
-    private int pageNum;    //当前页,从请求那边传过来。
-    private int pageSize;    //每页显示的数据条数。
-    private int totalRecord;    //总的记录条数。查询数据库得到的数据
+    private int pageNum;
+    //当前页,从请求那边传过来。
+    private int pageSize;
+    //每页显示的数据条数。
+    private int totalRecord;
+    //总的记录条数。查询数据库得到的数据
 
     //需要计算得来
-    private int totalPage;    //总页数，通过totalRecord和pageSize计算可以得来
+    private int totalPage;
+    //总页数，通过totalRecord和pageSize计算可以得来
     //开始索引，也就是我们在数据库中要从第几行数据开始拿，有了startIndex和pageSize，
     //就知道了limit语句的两个数据，就能获得每页需要显示的数据了
     private int startIndex;
@@ -67,7 +71,7 @@ public class PageBean<T> implements Serializable
         this.end = 5;
         //显示页数的算法
 
-        if(totalPage <=5){
+        if(totalPage <=this.end){
             //总页数都小于5，那么end就为总页数的值了。
             this.end = this.totalPage;
         }else{

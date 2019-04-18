@@ -74,7 +74,6 @@ public class PageDao
             while (rs.next())
             {
                 PageAction page = new PageAction();
-                //System.out.println(rs.getString("s"));
                 page.setOrgId(rs.getString("orgid"));
                 page.setOrgName(rs.getString("orgname"));
                 list.add(page);

@@ -33,7 +33,6 @@ public class PageController extends HttpServlet
         try
         {
            PageBean<PageAction> pageBean= testDao.testPage(3,20);
-            //JSONObject jsonObject= JSONObject.parseObject(pageBean);
 
             String s = JSON.toJSONString(pageBean);
             System.out.println(s);

@@ -2,12 +2,18 @@ package com.util;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
-
+/**  功能描述
+ * @Author zhoulq
+ * @Description //TODO
+ * @Date 8:36 2019/4/18
+ * @Param
+ * @return
+ **/
 public class PageUtil
 {
-    public static final String Text = "text";
-    public static final String BbsText = "bbstext";
-    public static final String BbsImage = "bbsimage";
+    public static final String TEXT = "text";
+    public static final String BBSTEXT = "bbstext";
+    public static final String BBSIMAGE = "bbsimage";
     private int pageSize = 20;
     private int rsCount = 0;
     private int pageCount = 0;
@@ -56,10 +62,10 @@ public class PageUtil
         String temp = "";
         String url = this.getParamUrl();
         // String url = this.request.getRequestURI() + "?";
-        int ProPage = this.currentPage - 1;
-        int Nextpage = this.currentPage + 1;
+        int proPage = this.currentPage - 1;
+        int nextpage = this.currentPage + 1;
         // 文字的分页
-        if (flag.equals(PageUtil.Text))
+        if (flag.equals(PageUtil.TEXT))
         {
             str.append("<form method='post' name='pageform' action=''>");
             str
@@ -76,7 +82,7 @@ public class PageUtil
             {
                 str.append("<a href='" + url + "&currentPage=1'>首页</a>");
                 str.append("&nbsp;&nbsp;&nbsp;");
-                str.append("<a href='" + url + "&currentPage=" + ProPage
+                str.append("<a href='" + url + "&currentPage=" + proPage
                         + "'>上一页</a>");
                 str.append("&nbsp;&nbsp;&nbsp;");
             } else
@@ -88,7 +94,7 @@ public class PageUtil
             }
             if (this.currentPage < this.pageCount)
             {
-                str.append("<a href='" + url + "&currentPage=" + Nextpage
+                str.append("<a href='" + url + "&currentPage=" + nextpage
                         + "'>下一页</a>");
                 str.append("&nbsp;&nbsp;&nbsp;");
             } else
@@ -130,7 +136,7 @@ public class PageUtil
             str.append("}");
             str.append("</script>");
             str.append("</form>");
-        } else if (flag.equals(PageUtil.BbsText))
+        } else if (flag.equals(PageUtil.BBSTEXT))
         {
             /**
              * 论坛形式的分页[直接以数字方式体现]
@@ -154,7 +160,7 @@ public class PageUtil
             // 设定是否有上一页的链接
             if (this.currentPage > 1)
             {
-                str.append("<a href='" + url + "&currentPage=" + ProPage
+                str.append("<a href='" + url + "&currentPage=" + proPage
                         + "'>上一页</a>");
                 str.append("&nbsp;&nbsp;&nbsp;");
             }
@@ -210,7 +216,7 @@ public class PageUtil
             // 设定是否有下一页的链接
             if (this.currentPage < this.pageCount)
             {
-                str.append("<a href='" + url + "&currentPage=" + Nextpage
+                str.append("<a href='" + url + "&currentPage=" + nextpage
                         + "'>下一页</a>");
                 str.append("&nbsp;&nbsp;");
             }
@@ -223,7 +229,7 @@ public class PageUtil
             }
 
             str.append("</td><td width='3%'>&nbsp;</td></tr></table>");
-        } else if (flag.equals(PageUtil.BbsImage))
+        } else if (flag.equals(PageUtil.BBSIMAGE))
         {
             /**
              * 论坛形式的分页[以图片的方式体现]
@@ -252,7 +258,7 @@ public class PageUtil
                 str.append("<a href='" + url
                         + "&currentPage=1' hidefocus=\"true\">首页</a>");
                 str.append("&nbsp;&nbsp;&nbsp;");
-                str.append("<a href='" + url + "&currentPage=" + ProPage
+                str.append("<a href='" + url + "&currentPage=" + proPage
                         + "' hidefocus=\"true\">上一页</a>");
                 str.append("&nbsp;&nbsp;&nbsp;");
             } else
@@ -325,7 +331,7 @@ public class PageUtil
                             + this.pageCount + "</a>&nbsp;&nbsp;");
                 }
 
-                str.append("<a href='" + url + "&currentPage=" + Nextpage
+                str.append("<a href='" + url + "&currentPage=" + nextpage
                         + "' hidefocus=\"true\">下一页</a>");
                 str.append("&nbsp;&nbsp;");
             } else
@@ -353,22 +359,23 @@ public class PageUtil
         String result = null;
         String pageUrl = request.getRequestURI();
         Enumeration<String> enumeration = request.getParameterNames();
-        String totalParamUrl = "";
+        StringBuilder totalParamUrl = new StringBuilder();
         while (enumeration.hasMoreElements())
         {
-            String param_name = enumeration.nextElement();
-            String param_value = request.getParameter(param_name);
-            if (param_name != null && !param_name.equals("")
-                    && !param_name.equals("currentPage")
-                    && !param_value.equals(""))
+            String paramName = enumeration.nextElement();
+            String paramValue = request.getParameter(paramName);
+            if (paramName != null && !"".equals(paramName)
+                    && !"currentPage".equals(paramName)
+                    && !"".equals(paramValue))
             {
-                if (totalParamUrl.equals(""))
+                if ("".equals(totalParamUrl))
                 {
-                    totalParamUrl = param_name + "=" + param_value;
+                    totalParamUrl.append(paramName + "=" + paramValue);
                 } else
                 {
-                    totalParamUrl = totalParamUrl + "&" + param_name + "="
-                            + param_value;
+                    totalParamUrl.append(totalParamUrl + "&" + paramName + "="
+                            + paramValue);
+
                 }
             }
         }

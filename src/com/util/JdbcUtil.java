@@ -6,7 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**  功能描述
+ * @Author zhoulq
+ * @Description //TODO
+ * @Date 8:35 2019/4/18
+ * @Param
+ * @return
+ **/
 public class JdbcUtil {
     static DbPoolConnection dataSource = DbPoolConnection.getInstance();
 
